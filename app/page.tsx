@@ -27,10 +27,7 @@ const HomePage = async () => {
         return (
           <div key={idx}>
             {Data?.length > 0 && (
-              <ProductList
-                Data={Data}
-                Category={slugify(item.level0, { lower: true, locale: "vi" })}
-              />
+              <ProductList Data={Data} Category={item.level0} />
             )}
           </div>
         );

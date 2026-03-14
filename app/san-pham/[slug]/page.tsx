@@ -104,7 +104,7 @@ export default async function CategoryPage({
     TitlePage = "Tất cả sản phẩm";
     filteredProducts = Products;
   } else {
-    let TitlePage = filterTitlePageBySlug(ProductCategory, params.slug);
+    TitlePage = filterTitlePageBySlug(ProductCategory, params.slug);
     filteredProducts = filterProductsBySlug(Products, params.slug);
   }
 
