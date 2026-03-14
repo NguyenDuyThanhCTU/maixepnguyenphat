@@ -12,20 +12,47 @@ import {
 import ProductGallery from "@components/client/product/ProductGallery";
 import BuyNowAction from "@components/client/product/BuyNowAction";
 import ProductSidebar from "@components/client/product/ProductSidebar";
+import { Metadata } from "next";
+import { ProductProps } from "@assets/props/PropsProduct";
+import { find } from "@config/lib/api";
+import { ContactProps } from "@assets/props/PropsConfig";
+import { LocalFindById } from "@components/items/Handle";
+import Link from "next/link";
+type ProductDetailProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-export default async function ProductDetailPage() {
-  // Dữ liệu mô phỏng (Mock Data)
-  const product = {
-    title: "Mẫu mái hiên, mái xếp di động – 02",
-    price: "Giá: liên hệ",
-    category: "Mái hiên, mái xếp di động",
-    image:
-      "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092726334_c59b4c0f97f2e1d3c338f73d8e5bfc4b.jpg",
-    gallery: [
-      "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092726334_c59b4c0f97f2e1d3c338f73d8e5bfc4b.jpg",
-      // Thêm các ảnh phụ nếu có
-    ],
+export async function generateMetadata({
+  params,
+}: ProductDetailProps): Promise<Metadata> {
+  const Products: ProductProps[] = await find("Products");
+  const Data: any = Products.find(
+    (item) => item.url.split("?poid")[0] === params.slug,
+  );
+  return {
+    title: Data?.title,
+    description: Data?.description,
   };
+}
+export async function generateStaticParams() {
+  const res: ProductProps[] = await find("Products");
+  return res?.map((product) => ({
+    slug: product?.url,
+  }));
+}
+
+export default async function ProductDetailPage({
+  params,
+}: ProductDetailProps) {
+  const Products: ProductProps[] = await find("Products");
+  const product: any = Products.find(
+    (item) => item.url.split("?poid")[0] === params.slug,
+  );
+
+  const ProductCategory = await find("ProductCategory");
+  const Config = await find("Config");
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
 
   return (
     <div className="w-full bg-white font-sans pb-16">
@@ -47,7 +74,7 @@ export default async function ProductDetailPage() {
             href="/danh-muc/mai-hien"
             className="hover:text-[#002651] transition-colors"
           >
-            {product.category}
+            {product?.category}
           </a>
         </nav>
       </div>
@@ -60,18 +87,18 @@ export default async function ProductDetailPage() {
             <div className="flex flex-col md:flex-row gap-8">
               {/* Phần Ảnh (6/12 của Cột Trái) */}
               <div className="w-full md:w-1/2">
-                <ProductGallery images={product.gallery} />
+                <ProductGallery image={product?.image} />
               </div>
 
               {/* Phần Thông Tin (6/12 của Cột Trái) */}
               <div className="w-full md:w-1/2 flex flex-col">
                 <h1 className="text-2xl md:text-[28px] font-bold text-gray-800 leading-snug mb-3">
-                  {product.title}
+                  {product?.title}
                 </h1>
                 <div className="w-12 h-[3px] bg-gray-300 mb-4"></div>
 
                 <p className="text-[#ff0000] font-bold text-[22px] mb-6">
-                  {product.price}
+                  {product?.price}
                 </p>
 
                 {/* Box Hỗ trợ trực tuyến (Nền vàng nhạt, viền đỏ đứt nét) */}
@@ -83,8 +110,10 @@ export default async function ProductDetailPage() {
                     </span>
                   </p>
                   <p className="mb-1 flex items-center font-bold text-[#ed1c24] text-[16px]">
-                    <Phone size={18} className="mr-2" /> HOTLINE: 0909.743.306 -
-                    0974.388.377
+                    <Phone size={18} className="mr-2" /> HOTLINE:{" "}
+                    <Link href={`tel:${ContactData?.Hotline}`}>
+                      {ContactData?.Hotline}
+                    </Link>
                   </p>
                   <p className="italic text-gray-600 flex items-center text-[13px]">
                     <Clock size={16} className="mr-2" /> (Mở cửa cả thứ bảy và
@@ -93,14 +122,14 @@ export default async function ProductDetailPage() {
                 </div>
 
                 {/* Gọi Nút Client Component */}
-                <BuyNowAction product={product} />
+                <BuyNowAction product={product} ContactData={ContactData} />
 
                 {/* Meta Category & Social */}
                 <div className="border-t border-gray-200 pt-4 mt-2">
                   <p className="text-[13px] text-gray-600 mb-3">
                     Category:{" "}
                     <a href="#" className="text-blue-600 hover:underline">
-                      {product.category}
+                      {product?.category}
                     </a>
                   </p>
 
@@ -137,8 +166,19 @@ export default async function ProductDetailPage() {
 
           {/* ================= CỘT PHẢI (SIDEBAR) - 3/12 ================= */}
           <div className="w-full lg:w-1/4">
-            <ProductSidebar />
+            <ProductSidebar ContactData={ContactData} />
           </div>
+        </div>
+        <div className="py-5">
+          <div className="border-t p:text-[30px] d:text-[40px] font-bold py-2">
+            Mô tả sản phẩm
+          </div>
+          <div
+            className="ck-content "
+            dangerouslySetInnerHTML={{
+              __html: product?.describe ? product.describe : "",
+            }}
+          ></div>
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ export default function Sidebar({ categories, recentPosts }: SidebarProps) {
               className="border-b border-gray-100 last:border-none"
             >
               <a
-                href={`/blogs/${slugify(cat.level0, { lower: true, locale: "vi" })}`}
+                href={`/san-pham/${slugify(cat.level0, { lower: true, locale: "vi" })}`}
                 className={`flex items-center px-4 py-3 text-[14px] transition-colors ${
                   cat.active
                     ? "text-[#002651] font-bold bg-gray-50"

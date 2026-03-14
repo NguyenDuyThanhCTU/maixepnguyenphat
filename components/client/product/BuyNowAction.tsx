@@ -3,18 +3,22 @@
 import React, { useState } from "react";
 import { ShoppingCart, X, Loader2, CheckCircle2 } from "lucide-react";
 import { ProductProps } from "@assets/props/PropsProduct";
+import { ContactProps } from "@assets/props/PropsConfig";
 
 interface BuyNowActionProps {
   product: ProductProps;
+  ContactData: ContactProps;
 }
 
-export default function BuyNowAction({ product }: any) {
+export default function BuyNowAction({
+  product,
+  ContactData,
+}: BuyNowActionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   // Email nhận thông báo đơn hàng
-  const ADMIN_EMAIL = "thanhnd2512@gmail.com";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -34,7 +38,7 @@ export default function BuyNowAction({ product }: any) {
 
     try {
       const response = await fetch(
-        `https://formsubmit.co/ajax/${ADMIN_EMAIL}`,
+        `https://formsubmit.co/ajax/${ContactData?.Email}`,
         {
           method: "POST",
           headers: {

@@ -3,15 +3,15 @@
 import React, { useState } from "react";
 import { Expand } from "lucide-react";
 
-export default function ProductGallery({ images }: { images: any }) {
-  const [mainImage, setMainImage] = useState(images[0]);
+export default function ProductGallery({ image }: { image: string }) {
+  // const [mainImage, setMainImage] = useState(images[0]);
 
   return (
     <div className="flex flex-col w-full">
       {/* Ảnh chính */}
       <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-md overflow-hidden mb-3 group cursor-pointer border border-gray-200">
         <img
-          src={mainImage}
+          src={image}
           alt="Sản phẩm chính"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -21,7 +21,7 @@ export default function ProductGallery({ images }: { images: any }) {
       </div>
 
       {/* Ảnh Thumbnails */}
-      <div className="flex space-x-2 overflow-x-auto pb-1">
+      {/* <div className="flex space-x-2 overflow-x-auto pb-1">
         {images.map((img: any, index: any) => (
           <div
             key={index}
@@ -39,7 +39,7 @@ export default function ProductGallery({ images }: { images: any }) {
             />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

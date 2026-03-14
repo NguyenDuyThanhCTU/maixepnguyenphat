@@ -32,10 +32,11 @@ export async function generateMetadata({
 
 export default async function SinglePostPage({ params }: PostsDetailProps) {
   const Posts = await find("Posts");
-  const CategoryData: CategoryProps[] = await find("PostCategory");
   const post: PostProps = Posts?.find(
     (item: PostProps) => item.url == params.slug,
   );
+  const ProductCategory: CategoryProps[] = await find("ProductCategory");
+
   return (
     <div className="w-full bg-[#fcfcfc] font-sans pb-20">
       <div className="d:container mx-auto px-4 py-8 md:py-12">
@@ -48,18 +49,18 @@ export default async function SinglePostPage({ params }: PostsDetailProps) {
                 href="/tin-tuc"
                 className="text-[11px] md:text-[12px] font-bold uppercase text-gray-500 hover:text-[#002651] tracking-widest mb-2 inline-block"
               >
-                {post.level0}
+                {post?.level0}
               </a>
               <h1 className="text-2xl md:text-3xl lg:text-[32px] font-bold text-gray-800 leading-tight mb-4">
-                {post.title}
+                {post?.title}
               </h1>
               <div className="flex items-center text-[12px] md:text-[13px] text-gray-500 uppercase tracking-wide">
-                <span>Posted on {post.date}</span>
+                <span>Posted on {post?.date}</span>
                 <span className="mx-2">|</span>
                 <span>
                   By{" "}
                   <strong className="text-gray-700">
-                    {post.author ? post.author : "Mái Xếp Nguyên Phát"}
+                    {post?.author ? post?.author : "Mái Xếp Nguyên Phát"}
                   </strong>
                 </span>
               </div>
@@ -69,7 +70,7 @@ export default async function SinglePostPage({ params }: PostsDetailProps) {
             <article
               className="prose prose-sm md:prose-base max-w-none text-gray-700 text-justify leading-relaxed prose-headings:text-gray-800 prose-headings:font-bold prose-h2:text-[20px] md:prose-h2:text-[22px] prose-h2:mt-8 prose-h2:mb-4 prose-p:mb-4 prose-a:text-blue-600 hover:prose-a:underline prose-strong:text-gray-800"
               dangerouslySetInnerHTML={{
-                __html: post.content ? post.content : "",
+                __html: post?.content ? post?.content : "",
               }}
             />
 
@@ -106,27 +107,27 @@ export default async function SinglePostPage({ params }: PostsDetailProps) {
             {/* Điều hướng Bài Trước / Bài Sau */}
             <nav className="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between gap-4">
               <div className="w-full sm:w-1/2 flex justify-start text-left">
-                {/* {post.prevPost && (
+                {/* {post?.prevPost && (
                   <a
-                    href={post.prevPost.link}
+                    href={post?.prevPost?.link}
                     className="group flex items-center text-[14px] text-gray-600 hover:text-[#002651] transition-colors leading-snug"
                   >
                     <ChevronLeft
                       size={20}
                       className="mr-2 flex-shrink-0 group-hover:-translate-x-1 transition-transform"
                     />
-                    <span className="line-clamp-2">{post.prevPost.title}</span>
+                    <span className="line-clamp-2">{post?.prevPost?.title}</span>
                   </a>
                 )} */}
               </div>
               <div className="hidden sm:block w-[1px] bg-gray-200"></div>
               <div className="w-full sm:w-1/2 flex justify-end text-right">
-                {/* {post.nextPost && (
+                {/* {post?.nextPost && (
                   <a
-                    href={post.nextPost.link}
+                    href={post?.nextPost?.link}
                     className="group flex items-center text-[14px] text-gray-600 hover:text-[#002651] transition-colors leading-snug justify-end"
                   >
-                    <span className="line-clamp-2">{post.nextPost.title}</span>
+                    <span className="line-clamp-2">{post?.nextPost?.title}</span>
                     <ChevronRight
                       size={20}
                       className="ml-2 flex-shrink-0 group-hover:translate-x-1 transition-transform"
@@ -139,7 +140,7 @@ export default async function SinglePostPage({ params }: PostsDetailProps) {
 
           {/* ================= CỘT PHẢI (SIDEBAR) - 3/12 ================= */}
           <div className="w-full lg:w-1/4">
-            <Sidebar categories={CategoryData} recentPosts={Posts} />
+            <Sidebar categories={ProductCategory} recentPosts={Posts} />
           </div>
         </div>
       </div>

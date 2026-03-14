@@ -8,8 +8,13 @@ import {
   Mail,
 } from "lucide-react";
 import { FaPhoneVolume } from "react-icons/fa";
+import { ContactProps } from "@assets/props/PropsConfig";
 
-export default function ProductSidebar() {
+export default function ProductSidebar({
+  ContactData,
+}: {
+  ContactData: ContactProps;
+}) {
   const commitments = [
     {
       text: "Dịch vụ và sản phẩm chất lượng, uy tín.",
@@ -63,17 +68,21 @@ export default function ProductSidebar() {
           <p className="flex items-center">
             <FaPhoneVolume size={16} className="mr-2 text-gray-600" />
             <strong>Hotline:</strong>{" "}
-            <a href="tel:0909743306" className="ml-1 text-[#ff0000] font-bold">
-              0909.743.306
+            <a
+              href="tel:0931 675 093"
+              className="ml-1 text-[#ff0000] font-bold"
+            >
+              {ContactData?.Hotline}
             </a>
           </p>
           <p className="flex items-center">
             <MapPin size={16} className="mr-2 text-gray-600" />
-            <strong>Zalo:</strong> <span className="ml-1">0909.743.306</span>
+            <strong>Zalo:</strong>{" "}
+            <span className="ml-1">{ContactData.Hotline}</span>
           </p>
           <p className="flex items-center">
             <Mail size={16} className="mr-2 text-gray-600" />
-            Chờ cập nhật Email...
+            {ContactData?.Email}
           </p>
         </div>
       </div>

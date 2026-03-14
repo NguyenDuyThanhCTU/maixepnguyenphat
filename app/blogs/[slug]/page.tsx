@@ -41,6 +41,7 @@ export default async function NewsPage({
   const Category: CategoryProps[] = await find("PostCategory");
   const searchFilterParams: any = searchParams.filter;
   const searchCategory: any = searchParams.category;
+  const ProductCategory: CategoryProps[] = await find("ProductCategory");
 
   let Datashow: PostProps[] = [];
 
@@ -119,7 +120,7 @@ export default async function NewsPage({
 
           {/* ================= CỘT PHẢI (SIDEBAR) - 3/12 ================= */}
           <div className="w-full lg:w-1/4">
-            <Sidebar categories={Category} recentPosts={Posts} />
+            <Sidebar categories={ProductCategory} recentPosts={Posts} />
           </div>
         </div>
       </div>

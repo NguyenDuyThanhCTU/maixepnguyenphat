@@ -43,7 +43,7 @@ export async function generateMetadata({
   const TitlePage = filterTitlePageBySlug(ProductCategory, params.slug);
 
   return {
-    title: `Những sản phẩm ${TitlePage} - Mái xếp Nguyên Phát`,
+    title: `Những sản phẩm ${TitlePage} - Cửa tự động 24h`,
   };
 }
 
@@ -98,9 +98,15 @@ export default async function CategoryPage({
   const ProductCategory: CategoryProps[] = await find("ProductCategory");
   const Products: ProductProps[] = await find("Products");
   const Posts: PostProps[] = await find("Posts");
-  let TitlePage = filterTitlePageBySlug(ProductCategory, params.slug);
-
-  const filteredProducts = filterProductsBySlug(Products, params.slug);
+  let TitlePage;
+  let filteredProducts;
+  if (params.slug === "tat-ca") {
+    TitlePage = "Tất cả sản phẩm";
+    filteredProducts = Products;
+  } else {
+    let TitlePage = filterTitlePageBySlug(ProductCategory, params.slug);
+    filteredProducts = filterProductsBySlug(Products, params.slug);
+  }
 
   return (
     <div className="w-full bg-white font-sans">
