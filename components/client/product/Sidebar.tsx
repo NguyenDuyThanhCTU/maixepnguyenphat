@@ -2,6 +2,7 @@ import React from "react";
 import { ChevronRight } from "lucide-react";
 import { CategoryProps } from "@assets/props/Props";
 import { PostProps } from "@assets/props/PropsPost";
+import slugify from "slugify";
 
 interface SidebarProps {
   categories: CategoryProps[];
@@ -23,7 +24,7 @@ export default function Sidebar({ categories, recentPosts }: SidebarProps) {
               className="border-b border-gray-100 last:border-none"
             >
               <a
-                href={cat.link}
+                href={`/blogs/${slugify(cat.level0, { lower: true, locale: "vi" })}`}
                 className={`flex items-center px-4 py-3 text-[14px] transition-colors ${
                   cat.active
                     ? "text-[#002651] font-bold bg-gray-50"
@@ -34,7 +35,7 @@ export default function Sidebar({ categories, recentPosts }: SidebarProps) {
                   size={14}
                   className={`mr-2 ${cat.active ? "text-[#002651]" : "text-gray-400"}`}
                 />
-                {cat.name}
+                {cat.level0}
               </a>
             </li>
           ))}
@@ -47,12 +48,13 @@ export default function Sidebar({ categories, recentPosts }: SidebarProps) {
           Bài viết mới nhất
         </h4>
         <ul className="flex flex-col p-4 space-y-4">
-          {recentPosts.map((post, index) => (
+          {recentPosts.slice(0, 8).map((post, index) => (
             <li key={index} className="flex items-start group cursor-pointer">
               <div className="flex flex-col items-center justify-center border border-gray-200 rounded-sm min-w-[45px] px-1 py-1 mr-3 group-hover:border-[#002651] transition-colors">
-                {/* <span className="text-[16px] font-bold text-gray-800 leading-none">{post.day}</span>
-                <span className="text-[10px] text-gray-500 uppercase mt-1">{post.month}</span> */}
-                thứ ...
+                <img
+                  src={post.image}
+                  className="text-[16px] w-6 h-6 object-cover"
+                ></img>
               </div>
               <a
                 href={post.url}

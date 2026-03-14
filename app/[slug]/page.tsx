@@ -8,88 +8,34 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Sidebar from "@components/client/product/Sidebar";
+import { Metadata } from "next";
+import { find } from "@config/lib/api";
+import { PostProps } from "@assets/props/PropsPost";
+import { CategoryProps } from "@assets/props/Props";
 
-export default async function SinglePostPage() {
-  // --- MOCK DATA (Thay bằng fetch data từ DB/CMS dựa trên slug) ---
-  const post: any = {
-    title: "Mẹo hay giúp bạn chọn mái hiên di động cho ngôi nhà",
-    date: "7 Tháng 7, 2024",
-    author: "Mr Anh",
-    category: "Tin Tức",
-    content: `
-      <h2>1. Chọn mái hiên di động phù hợp với mục đích sử dụng</h2>
-      <p>Mái hiên di động với mục đích che mưa, che nắng cho ngôi nhà của bạn, nhưng không phải lúc nào bạn cũng sử dụng mái hiên. Chỉ trong khoảng thời tiết xấu như nắng lớn, mưa nhiều thì kéo ra sử dụng mái hiên di động còn lại bạn có thể thu mái hiên cho hiên nhà tràn ngập nắng mới.</p>
-      <p>Một chiếc mái hiên di động cho sân vườn cũng là một sự lựa chọn thú vị, nhà bạn có sân vườn rộng bạn muốn mình có không gian để hưởng ngoạn thú vui uống trà đọc sách khi rảnh rỗi thì một chiếc mái hiên di động ngoài trời là quá hợp lý.</p>
-      <p>Bể bơi trong nhà cũng là không gian cần có sự kết hợp với mái hiên di động. Tránh sự tác động của thời tiết thay đổi với bể bơi thì nên chọn mái hiên di động.</p>
-      <p>Ngoài ra, mái hiên di động không chỉ phù hợp cho ngôi nhà của bạn mà nó ứng dụng nhiều cho quán cafe, quán nhậu, tiệc đứng ngoài trời, trường học, nhà gửi xe,…Còn rất nhiều mẫu <strong>mái xếp di động Bình Dương</strong> đẹp, nếu bạn quan tâm hãy tham khảo nhé</p>
-      
-      <h2>2. Chọn mái hiên có màu sắc phù hợp</h2>
-      <p>Màu sắc của mái hiên cũng ảnh hưởng đến hiệu quả cũng như tính thẩm mỹ của không gian ngôi nhà của bạn. Đa số, mái hiên dùng để làm mát khoảng không trước hay sau ngôi nhà nên chọn mái hiên có màu sắc mát mẻ như màu xanh, màu trắng, màu vàng nhạt,…</p>
-      
-      <h2>3. Chọn mái hiên phù hợp với phong thủy ngôi nhà</h2>
-      <p>Không chỉ chọn màu phù hợp với mệnh của gia chủ, bạn hãy chọn kiểu dáng mái hiên phù hợp với ngôi nhà mình để tạo luồng sinh khí tốt cho ngôi nhà tránh ảnh hưởng đến sức khỏe cũng như hao tài phí của của căn nhà.</p>
-      
-      <h2>4. Chọn cơ sở thi công mái hiên di động uy tín</h2>
-      <p>Muốn chọn cơ sở thi công mái hiên di động hiện nay không hề khó khăn, các cơ sở thi công mái hiên mọc lên nhan nhãn những liệu bạn có tìm ra một cái tên uy tín để giao phó không gian ngôi nhà của mình?</p>
-      <p><strong>Mái Hiên – Mái Xếp Nguyên Phát</strong> chắc chắn là cái tên đáng được chú ý nhất. Với kinh nghiệm thi công mái hiên dày dặn trong nghề, Mái Hiên – Mái Xếp Nguyên Phát có trình độ chuyên môn cao cộng với việc ứng dụng công nghệ máy móc hiện đại thì mái hiên của cơ sở có chất lượng tốt có tiếng ở miền Trung.</p>
-      <p><strong>Mái Hiên – Mái Xếp Nguyên Phát</strong> có tuổi thọ cao (mái bạt từ 3-10 năm, khung kim loại từ 6-20 năm), thời gian thi công rút ngắn, thi công trên nhiều địa hình khác nhau, phạm vi hoạt động rộng khắp, giá cả lại phải chăng, đội ngũ nhân viên của cơ sở sẽ tư vấn thêm cho khách hàng để có được công trình đẹp mắt và bền chắc nhất có thể.</p>
-    `,
-    prevPost: {
-      title: "Kinh nghiệm lựa chọn mái che di động quán cà phê",
-      link: "#",
-    },
-    nextPost: {
-      title: "Mái Hiên – Mái Xếp Nguyên Phát – 0909.743.306",
-      link: "#",
-    },
+interface PostsDetailProps {
+  params: { slug: string };
+}
+export async function generateMetadata({
+  params,
+}: PostsDetailProps): Promise<Metadata> {
+  const posts = await find("Posts");
+
+  const Data: PostProps = posts?.find(
+    (item: PostProps) => item.url == params.slug,
+  );
+  return {
+    title: Data?.title ? Data?.title : "Bài viết",
+    description: Data?.description,
   };
+}
 
-  const categories: any = [
-    { name: "Mái hiên, mái xếp di động", active: false, link: "#" },
-    { name: "Mái che lấy sáng", active: false, link: "#" },
-    { name: "Dù che nắng", active: false, link: "#" },
-    { name: "Màng thả", active: false, link: "#" },
-    { name: "Cửa cuốn, cửa kéo", active: false, link: "#" },
-    { name: "Mái vòm", active: false, link: "#" },
-    { name: "Linh kiện, phụ kiện", active: false, link: "#" },
-  ];
-
-  const recentPosts: any = [
-    {
-      day: "31",
-      month: "Th8",
-      title:
-        "Mái hiên di an, mái hiên thuân an – [mái hiên thủ dầu một giá rẻ]",
-      link: "#",
-    },
-    {
-      day: "07",
-      month: "Th4",
-      title: "MÁI TÔN – ĐỒNG NAI- BIÊN HÒA – GIÁ RẺ ĐT 0909743306",
-      link: "#",
-    },
-    {
-      day: "16",
-      month: "Th3",
-      title:
-        "Lợp Mái Tôn-Thay Tôn- Thuận An -Thủ Dầu Một -Bình Dương [Trọn Gói 0909743306]",
-      link: "#",
-    },
-    {
-      day: "25",
-      month: "Th2",
-      title: "99 MẨU MÁI TÔN. LƠP TÔN .GIÁ RẺ TẠI VĨNH CỮU ĐỒNG NAI",
-      link: "#",
-    },
-    {
-      day: "09",
-      month: "Th1",
-      title:
-        "Bạt Lót Ao Hồ Nuôi Trồng Thủy Hải Sản Tại Đồng Nai giá rẻ ĐT 0909743306",
-      link: "#",
-    },
-  ];
-
+export default async function SinglePostPage({ params }: PostsDetailProps) {
+  const Posts = await find("Posts");
+  const CategoryData: CategoryProps[] = await find("PostCategory");
+  const post: PostProps = Posts?.find(
+    (item: PostProps) => item.url == params.slug,
+  );
   return (
     <div className="w-full bg-[#fcfcfc] font-sans pb-20">
       <div className="d:container mx-auto px-4 py-8 md:py-12">
@@ -102,7 +48,7 @@ export default async function SinglePostPage() {
                 href="/tin-tuc"
                 className="text-[11px] md:text-[12px] font-bold uppercase text-gray-500 hover:text-[#002651] tracking-widest mb-2 inline-block"
               >
-                {post.category}
+                {post.level0}
               </a>
               <h1 className="text-2xl md:text-3xl lg:text-[32px] font-bold text-gray-800 leading-tight mb-4">
                 {post.title}
@@ -111,7 +57,10 @@ export default async function SinglePostPage() {
                 <span>Posted on {post.date}</span>
                 <span className="mx-2">|</span>
                 <span>
-                  By <strong className="text-gray-700">{post.author}</strong>
+                  By{" "}
+                  <strong className="text-gray-700">
+                    {post.author ? post.author : "Mái Xếp Nguyên Phát"}
+                  </strong>
                 </span>
               </div>
             </header>
@@ -119,7 +68,9 @@ export default async function SinglePostPage() {
             {/* Nội dung chính (Sử dụng Prose của TailwindCSS) */}
             <article
               className="prose prose-sm md:prose-base max-w-none text-gray-700 text-justify leading-relaxed prose-headings:text-gray-800 prose-headings:font-bold prose-h2:text-[20px] md:prose-h2:text-[22px] prose-h2:mt-8 prose-h2:mb-4 prose-p:mb-4 prose-a:text-blue-600 hover:prose-a:underline prose-strong:text-gray-800"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{
+                __html: post.content ? post.content : "",
+              }}
             />
 
             {/* Khối Share Bài Viết */}
@@ -155,7 +106,7 @@ export default async function SinglePostPage() {
             {/* Điều hướng Bài Trước / Bài Sau */}
             <nav className="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between gap-4">
               <div className="w-full sm:w-1/2 flex justify-start text-left">
-                {post.prevPost && (
+                {/* {post.prevPost && (
                   <a
                     href={post.prevPost.link}
                     className="group flex items-center text-[14px] text-gray-600 hover:text-[#002651] transition-colors leading-snug"
@@ -166,11 +117,11 @@ export default async function SinglePostPage() {
                     />
                     <span className="line-clamp-2">{post.prevPost.title}</span>
                   </a>
-                )}
+                )} */}
               </div>
               <div className="hidden sm:block w-[1px] bg-gray-200"></div>
               <div className="w-full sm:w-1/2 flex justify-end text-right">
-                {post.nextPost && (
+                {/* {post.nextPost && (
                   <a
                     href={post.nextPost.link}
                     className="group flex items-center text-[14px] text-gray-600 hover:text-[#002651] transition-colors leading-snug justify-end"
@@ -181,14 +132,14 @@ export default async function SinglePostPage() {
                       className="ml-2 flex-shrink-0 group-hover:translate-x-1 transition-transform"
                     />
                   </a>
-                )}
+                )} */}
               </div>
             </nav>
           </div>
 
           {/* ================= CỘT PHẢI (SIDEBAR) - 3/12 ================= */}
           <div className="w-full lg:w-1/4">
-            <Sidebar categories={categories} recentPosts={recentPosts} />
+            <Sidebar categories={CategoryData} recentPosts={Posts} />
           </div>
         </div>
       </div>

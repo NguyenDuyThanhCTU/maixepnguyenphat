@@ -2,13 +2,15 @@
 
 import React, { useState } from "react";
 import { Loader2, CheckCircle2, Send } from "lucide-react";
+import { ContactProps } from "@assets/props/PropsConfig";
+import { LocalFindById } from "@components/items/Handle";
 
-export default function ContactForm() {
+export default function ContactForm({ Config }: { Config: Array<any> }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
 
   // Thay bằng email thực tế của bạn
-  const ADMIN_EMAIL = "EMAIL_QUAN_TRI_CUA_BAN@gmail.com";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ export default function ContactForm() {
 
     try {
       const response = await fetch(
-        `https://formsubmit.co/ajax/${ADMIN_EMAIL}`,
+        `https://formsubmit.co/ajax/${ContactData?.Email}`,
         {
           method: "POST",
           headers: {
