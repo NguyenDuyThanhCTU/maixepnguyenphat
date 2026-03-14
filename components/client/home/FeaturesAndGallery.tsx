@@ -11,14 +11,19 @@ import {
   ChevronRight,
   ZoomIn,
 } from "lucide-react";
+import { CollectionProps } from "@assets/props/Props";
 
-export default function FeaturesAndGallery() {
+export default function FeaturesAndGallery({
+  Data,
+}: {
+  Data: CollectionProps[];
+}) {
   // --- Data: 06 Lý do ---
   const reasons = [
     {
       id: 1,
       title: "HOẠT ĐỘNG LÂU NĂM",
-      desc: "Mái Hiên – Mái Xếp Hoàng Thông là 1 trong những đơn vị hoạt động lâu năm nhất trong lĩnh vực lắp đặt mái hiên, mái xếp tại Bình Dương.",
+      desc: "Mái Hiên – Mái Xếp Nguyên Phát là 1 trong những đơn vị hoạt động lâu năm nhất trong lĩnh vực lắp đặt mái hiên, mái xếp tại Bình Dương.",
       icon: <History className="text-[#002651]" size={32} />,
     },
     {
@@ -30,7 +35,7 @@ export default function FeaturesAndGallery() {
     {
       id: 3,
       title: "GIÁ TỐT NHẤT THỊ TRƯỜNG",
-      desc: "Với lợi thế là đại lý cấp 1 từ nhà máy sản xuất, Mái Hiên – Mái Xếp Hoàng Thông cam kết mức giá sản phẩm thấp nhất trên thị trường.",
+      desc: "Với lợi thế là đại lý cấp 1 từ nhà máy sản xuất, Mái Hiên – Mái Xếp Nguyên Phát cam kết mức giá sản phẩm thấp nhất trên thị trường.",
       icon: <BadgeDollarSign className="text-[#002651]" size={32} />,
     },
     {
@@ -42,7 +47,7 @@ export default function FeaturesAndGallery() {
     {
       id: 5,
       title: "SẢN PHẨM CHẤT LƯỢNG CAO",
-      desc: "Mái Hiên – Mái Xếp Hoàng Thông hoạt động chuyên nghiệp, bảo hành lâu dài cho từng loại sản phẩm.",
+      desc: "Mái Hiên – Mái Xếp Nguyên Phát hoạt động chuyên nghiệp, bảo hành lâu dài cho từng loại sản phẩm.",
       icon: <ThumbsUp className="text-[#002651]" size={32} />,
     },
     {
@@ -54,25 +59,16 @@ export default function FeaturesAndGallery() {
   ];
 
   // --- Data: Hình ảnh hoạt động ---
-  const galleryImages = [
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092726334_c59b4c0f97f2e1d3c338f73d8e5bfc4b.jpg",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092698099_2873228eb759090243fdfee9bf9b1f80.jpg",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092696583_371617a4e42ef87863c5f0d82ad8f048.jpg",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092714594_cbf6c9aadd8f6a950dec8dad1fca5b86.jpg",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/871720d4fb055847871720d4fb0558470564ff7e4f20927ecb319.jpg",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092705974_4b24a9884e78c1dde5f11f95b7c55202.jpg",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092684476_019a160a8e3c591b8220ee8bd7ea19eb.jpg",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/z5372092726334_c59b4c0f97f2e1d3c338f73d8e5bfc4b.jpg", // Lặp lại ảnh 1 để lấp đầy grid 8 ô theo bản gốc
-  ];
+  const galleryImages = Data?.filter((item) => item.type === "hinh-anh");
 
   return (
     <div className="w-full bg-white font-sans">
       {/* ================= SECTION: 06 LÝ DO ================= */}
       <section className="py-12 bg-gray-50 border-t border-b border-gray-100">
-        <div className="container mx-auto px-4">
+        <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2  mx-auto px-4">
           <div className="text-center mb-10">
             <h3 className="text-xl md:text-2xl font-bold uppercase text-gray-800 relative inline-block">
-              06 LÝ DO NÊN CHỌN MÁI HIÊN - MÁI XẾP HOÀNG THÔNG
+              06 LÝ DO NÊN CHỌN MÁI HIÊN - MÁI XẾP Nguyên Phát
               <span className="absolute -bottom-3 left-1/2 w-16 h-[2px] bg-gray-300 -translate-x-1/2"></span>
             </h3>
           </div>
@@ -102,7 +98,7 @@ export default function FeaturesAndGallery() {
 
       {/* ================= SECTION: HÌNH ẢNH HOẠT ĐỘNG ================= */}
       <section className="py-12">
-        <div className="container mx-auto px-4">
+        <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4">
           <div className="text-center mb-10">
             <h3 className="text-xl md:text-2xl font-bold uppercase text-gray-800 relative inline-block">
               HÌNH ẢNH HOẠT ĐỘNG
@@ -114,13 +110,13 @@ export default function FeaturesAndGallery() {
             {galleryImages.map((src, index) => (
               <a
                 key={index}
-                href={src}
+                href={src.image}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative block w-full aspect-square overflow-hidden rounded-lg cursor-pointer bg-gray-100 shadow-sm"
               >
                 <img
-                  src={src}
+                  src={src.image}
                   alt={`Hoạt động thi công ${index + 1}`}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
@@ -138,7 +134,7 @@ export default function FeaturesAndGallery() {
 
           <div className="flex justify-center mt-10">
             <a
-              href="/hinh-anh/"
+              href="/hinh-anh-thi-cong"
               className="inline-flex items-center px-6 py-2.5 bg-[#002651] text-white font-medium rounded-lg hover:bg-blue-900 transition-colors shadow-md"
             >
               <span>Xem tất cả</span>

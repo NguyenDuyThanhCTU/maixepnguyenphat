@@ -13,25 +13,38 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
+import { LocalFindById } from "@components/items/Handle";
+import { ContactProps } from "@assets/props/PropsConfig";
+import Link from "next/link";
 
-export default function Header() {
+interface HeaderProps {
+  Config: Array<any>;
+}
+
+export default function Header({ Config }: HeaderProps) {
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
   return (
     <header className="w-full bg-white font-sans shadow-sm">
       {/* --- TOP BAR (Hiển thị trên Desktop, ẩn trên Mobile) --- */}
       <div className="hidden md:flex bg-gray-100 border-b border-gray-200 text-[13px] py-1.5">
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 flex justify-between items-center">
           <ul className="flex items-center space-x-6 text-gray-600">
             <li className="flex items-center hover:text-[#002651] cursor-pointer">
               <MapPin size={14} className="mr-1.5 text-[#002651]" />
-              <span>Mái Hiên - Mái Xếp Hoàng Thông</span>
+              <span>Mái Hiên - Mái Xếp Nguyên Phát</span>
             </li>
             <li className="flex items-center hover:text-[#002651] cursor-pointer">
               <Mail size={14} className="mr-1.5 text-[#002651]" />
-              <span>Chờ cập nhật Email...</span>
+              <span>{ContactData?.Email}</span>
             </li>
             <li className="flex items-center hover:text-[#002651] cursor-pointer">
               <Phone size={14} className="mr-1.5 text-[#002651]" />
-              <span className="font-semibold">0909.743.306 - 0974.388.377</span>
+              <Link
+                href={`tel:${ContactData?.Hotline}`}
+                className="font-semibold"
+              >
+                {ContactData?.Hotline}
+              </Link>
             </li>
           </ul>
 
@@ -53,14 +66,14 @@ export default function Header() {
       </div>
 
       {/* --- MAIN HEADER (Logo, Slogan, Hotline) --- */}
-      <div className="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+      <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
         {/* Logo */}
         <div className="w-1/2 md:w-1/3 lg:w-1/4">
           <a href="/">
             <img
-              src="https://maihienhoangthong.com/wp-content/uploads/2024/07/logo-18289921.png"
-              alt="Mái Hiên – Mái Xếp Hoàng Thông"
-              className="w-full h-auto object-contain max-w-[250px]"
+              src={ContactData?.LogoWebsite}
+              alt="Mái Hiên – Mái Xếp Nguyên Phát"
+              className="w-full h-auto object-contain max-w-[200px]"
             />
           </a>
         </div>
@@ -75,8 +88,8 @@ export default function Header() {
         </div>
 
         {/* Hotline Box */}
-        <div className="flex items-center justify-end w-1/2 md:w-1/3 lg:w-1/4">
-          <div className="flex items-center space-x-3">
+        <div className="flex  items-center justify-end w-1/2 md:w-1/3 lg:w-1/4">
+          <div className="flex items-center space-x-3 d:flex-row p:flex-col">
             <img
               src="https://maihienhoangthong.com/wp-content/uploads/2022/08/1625829.gif"
               alt="Hotline"
@@ -85,9 +98,12 @@ export default function Header() {
             <div className="text-sm md:text-base text-gray-800">
               Liên hệ tư vấn
               <br />
-              <span className="text-[#ff0000] text-[18px] md:text-[20px] font-bold">
-                0909.743.306
-              </span>
+              <Link
+                href={`tel:${ContactData?.Hotline}`}
+                className="text-[#ff0000] text-[18px] md:text-[20px] font-bold"
+              >
+                {ContactData?.Hotline}
+              </Link>
             </div>
           </div>
         </div>
@@ -95,7 +111,7 @@ export default function Header() {
 
       {/* --- NAVIGATION BAR (Nền xanh đậm) --- */}
       <div className="bg-[#002651] sticky top-0 z-50">
-        <div className="container mx-auto px-4 flex justify-between items-center h-[50px]">
+        <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 flex justify-between items-center h-[50px]">
           {/* Nút Menu Mobile (Hiển thị trên thiết bị nhỏ) */}
           <button className="md:hidden text-white flex items-center">
             <Menu size={24} />
@@ -104,33 +120,54 @@ export default function Header() {
           {/* Menu Desktop */}
           <nav className="hidden md:flex items-center h-full">
             <ul className="flex space-x-1 h-full text-white text-[14px] font-semibold uppercase">
-              <li className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors text-[#f8a51c]">
+              <Link
+                href="/"
+                className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors text-[#f8a51c]"
+              >
                 Trang chủ
-              </li>
-              <li className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors">
+              </Link>
+              <Link
+                href="/gioi-thieu"
+                className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors"
+              >
                 Giới Thiệu
-              </li>
+              </Link>
 
               {/* Dropdown Sản Phẩm */}
-              <li className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors group relative">
+              <Link
+                href="/san-pham/tat-ca"
+                className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors group relative"
+              >
                 Sản Phẩm <ChevronDown size={14} className="ml-1" />
                 {/* Ở phiên bản hoàn thiện, phần này sẽ chứa thẻ <ul> absolute cho Dropdown menu */}
-              </li>
+              </Link>
 
               {/* Dropdown Dịch vụ */}
-              <li className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors group relative">
+              <Link
+                href="/blogs/dich-vu-thi-cong"
+                className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors group relative"
+              >
                 Dịch vụ thi công <ChevronDown size={14} className="ml-1" />
-              </li>
+              </Link>
 
-              <li className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors">
+              <Link
+                href="/hinh-anh-thi-cong"
+                className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors"
+              >
                 Hình ảnh thi công
-              </li>
-              <li className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors">
+              </Link>
+              <Link
+                href="/blogs/tin-tuc"
+                className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors"
+              >
                 Tin Tức
-              </li>
-              <li className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors">
+              </Link>
+              <Link
+                href="/lien-he"
+                className="h-full flex items-center px-3 hover:bg-white/10 cursor-pointer transition-colors"
+              >
                 Liên hệ
-              </li>
+              </Link>
             </ul>
           </nav>
 

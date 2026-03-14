@@ -31,15 +31,15 @@ export default async function SinglePostPage() {
       
       <h2>4. Chọn cơ sở thi công mái hiên di động uy tín</h2>
       <p>Muốn chọn cơ sở thi công mái hiên di động hiện nay không hề khó khăn, các cơ sở thi công mái hiên mọc lên nhan nhãn những liệu bạn có tìm ra một cái tên uy tín để giao phó không gian ngôi nhà của mình?</p>
-      <p><strong>Mái Hiên – Mái Xếp Hoàng Thông</strong> chắc chắn là cái tên đáng được chú ý nhất. Với kinh nghiệm thi công mái hiên dày dặn trong nghề, Mái Hiên – Mái Xếp Hoàng Thông có trình độ chuyên môn cao cộng với việc ứng dụng công nghệ máy móc hiện đại thì mái hiên của cơ sở có chất lượng tốt có tiếng ở miền Trung.</p>
-      <p><strong>Mái Hiên – Mái Xếp Hoàng Thông</strong> có tuổi thọ cao (mái bạt từ 3-10 năm, khung kim loại từ 6-20 năm), thời gian thi công rút ngắn, thi công trên nhiều địa hình khác nhau, phạm vi hoạt động rộng khắp, giá cả lại phải chăng, đội ngũ nhân viên của cơ sở sẽ tư vấn thêm cho khách hàng để có được công trình đẹp mắt và bền chắc nhất có thể.</p>
+      <p><strong>Mái Hiên – Mái Xếp Nguyên Phát</strong> chắc chắn là cái tên đáng được chú ý nhất. Với kinh nghiệm thi công mái hiên dày dặn trong nghề, Mái Hiên – Mái Xếp Nguyên Phát có trình độ chuyên môn cao cộng với việc ứng dụng công nghệ máy móc hiện đại thì mái hiên của cơ sở có chất lượng tốt có tiếng ở miền Trung.</p>
+      <p><strong>Mái Hiên – Mái Xếp Nguyên Phát</strong> có tuổi thọ cao (mái bạt từ 3-10 năm, khung kim loại từ 6-20 năm), thời gian thi công rút ngắn, thi công trên nhiều địa hình khác nhau, phạm vi hoạt động rộng khắp, giá cả lại phải chăng, đội ngũ nhân viên của cơ sở sẽ tư vấn thêm cho khách hàng để có được công trình đẹp mắt và bền chắc nhất có thể.</p>
     `,
     prevPost: {
       title: "Kinh nghiệm lựa chọn mái che di động quán cà phê",
       link: "#",
     },
     nextPost: {
-      title: "Mái Hiên – Mái Xếp Hoàng Thông – 0909.743.306",
+      title: "Mái Hiên – Mái Xếp Nguyên Phát – 0909.743.306",
       link: "#",
     },
   };
@@ -92,7 +92,7 @@ export default async function SinglePostPage() {
 
   return (
     <div className="w-full bg-[#fcfcfc] font-sans pb-20">
-      <div className="container mx-auto px-4 py-8 md:py-12">
+      <div className="d:container mx-auto px-4 py-8 md:py-12">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* ================= CỘT TRÁI (NỘI DUNG BÀI VIẾT) - 9/12 ================= */}
           <div className="w-full lg:w-3/4 bg-white p-6 md:p-8 rounded-lg shadow-sm border border-gray-100">

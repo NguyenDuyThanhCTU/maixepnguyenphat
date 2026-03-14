@@ -24,7 +24,7 @@ export default async function GalleryPage() {
 
   return (
     <div className="w-full bg-white font-sans pb-20">
-      <div className="container mx-auto px-4 py-12 md:py-16">
+      <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 py-12 md:py-16">
         {/* Tiêu đề Section (Căn trái theo bản gốc) */}
         <div className="mb-10">
           <h1 className="text-xl md:text-2xl font-bold uppercase text-gray-800 mb-2 relative inline-block">

@@ -13,8 +13,14 @@ import {
   MessageCircle,
   ArrowUp,
 } from "lucide-react";
+import { LocalFindById } from "@components/items/Handle";
+import { ContactProps } from "@assets/props/PropsConfig";
+import slugify from "slugify";
+import { RevalidateTags } from "@app/action";
 
-export default function Footer() {
+export default function Footer({ Config }: { Config: Array<any> }) {
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
+
   // Hàm cuộn lên đầu trang
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -39,7 +45,7 @@ export default function Footer() {
       </div>
 
       {/* --- Nội dung chính Footer --- */}
-      <div className="container mx-auto px-4 pt-16 pb-12">
+      <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* CỘT 1: Thông tin liên hệ (5 phần) */}
           <div className="md:col-span-5 flex flex-col">
@@ -49,7 +55,7 @@ export default function Footer() {
             </h4>
 
             <h5 className="text-white font-bold text-[15px] mb-4">
-              CÔNG TY TNHH CƠ KHÍ XÂY DỰNG DỊCH VỤ HOÀNG THÔNG
+              CÔNG TY TNHH CƠ KHÍ MÁI CHE NGUYÊN PHÁT
             </h5>
 
             <ul className="space-y-3 text-[14px]">
@@ -59,8 +65,8 @@ export default function Footer() {
                   className="mr-3 text-white flex-shrink-0 mt-0.5"
                 />
                 <span>
-                  <strong className="text-white">Hotline:</strong> 0909.743.306
-                  - 0832.26.28.29 - 0974.388.377
+                  <strong className="text-white">Hotline:</strong>{" "}
+                  {ContactData?.Hotline}
                 </span>
               </li>
               <li className="flex items-start">
@@ -69,32 +75,22 @@ export default function Footer() {
                   className="mr-3 text-white flex-shrink-0 mt-0.5"
                 />
                 <span>
-                  <strong className="text-white">Cơ sở 1:</strong> 9358/4, Tổ 4,
-                  Khu Phố Bình Thung 2, Phường Bình An, Thành phố Dĩ An, Tỉnh
-                  Bình Dương
+                  <strong className="text-white">Địa chỉ:</strong>{" "}
+                  {ContactData?.CompanyAddress}
                 </span>
               </li>
-              <li className="flex items-start">
-                <MapPin
-                  size={18}
-                  className="mr-3 text-white flex-shrink-0 mt-0.5"
-                />
-                <span>
-                  <strong className="text-white">Cơ sở 2:</strong> 232 Quốc lộ
-                  1K, P. Bửu Long, TP. Biên Hòa, Tỉnh Đồng Nai
-                </span>
-              </li>
+
               <li className="flex items-center">
                 <FileText size={18} className="mr-3 text-white flex-shrink-0" />
                 <span>
-                  <strong className="text-white">MST:</strong> 3703259918
+                  <strong className="text-white">MST:</strong>
                 </span>
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-3 text-white flex-shrink-0" />
                 <span>
-                  <strong className="text-white">Email:</strong> Chờ cập nhật
-                  Email...
+                  <strong className="text-white">Email:</strong>
+                  {ContactData?.Email}
                 </span>
               </li>
             </ul>
@@ -136,27 +132,22 @@ export default function Footer() {
             </h4>
 
             <ul className="space-y-3 text-[14px]">
-              {[
-                "Giới thiệu",
-                "Sản phẩm",
-                "Dịch vụ",
-                "Hình ảnh thi công",
-                "Tin tức",
-                "Liên hệ",
-              ].map((item, index) => (
-                <li key={index}>
-                  <a
-                    href="#"
-                    className="flex items-center group hover:text-white transition-colors"
-                  >
-                    <ChevronRight
-                      size={16}
-                      className="mr-2 text-gray-500 group-hover:text-white group-hover:translate-x-1 transition-all"
-                    />
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {["Trang chủ", "Giới thiệu", "Hình ảnh thi công", "Liên hệ"].map(
+                (item, index) => (
+                  <li key={index}>
+                    <a
+                      href={`${item === "Trang chủ" ? "/" : `/${slugify(item, { locale: "vi", lower: true })}`}`}
+                      className="flex items-center group hover:text-white transition-colors"
+                    >
+                      <ChevronRight
+                        size={16}
+                        className="mr-2 text-gray-500 group-hover:text-white group-hover:translate-x-1 transition-all"
+                      />
+                      {item}
+                    </a>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
 
@@ -170,7 +161,7 @@ export default function Footer() {
             {/* Box chứa Iframe Facebook */}
             <div className="w-full bg-white/5 rounded-lg overflow-hidden border border-white/10 h-[200px]">
               <iframe
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=340&height=200&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=302009291669288"
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=340&height=200&small_header=false&adapt_d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto_width=true&hide_cover=false&show_facepile=true&appId=302009291669288"
                 width="100%"
                 height="100%"
                 style={{ border: "none", overflow: "hidden" }}
@@ -186,12 +177,12 @@ export default function Footer() {
       </div>
 
       {/* --- Thanh Bản quyền (Copyright Bottom Bar) --- */}
-      <div className="border-t border-white/10 py-4 text-center text-[13px] text-gray-400 relative">
-        <div className="container mx-auto px-4">
-          Bản quyền 2024 © Mái Hiên - Mái Xếp Hoàng Thông | Thiết kế bởi{" "}
-          <a href="#" className="text-white hover:underline">
-            Google Meta
-          </a>
+      <div
+        className="border-t cursor-pointer border-white/10 py-4 text-center text-[13px] text-gray-400 relative"
+        onClick={() => RevalidateTags()}
+      >
+        <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2  mx-auto px-4">
+          Bản quyền 2026 © Mái Hiên - Mái Xếp Nguyên Phát
         </div>
       </div>
 

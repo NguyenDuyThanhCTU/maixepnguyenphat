@@ -4,7 +4,7 @@ import React from "react";
 export default function ContactPage() {
   return (
     <div className="w-full bg-white font-sans pb-16">
-      <div className="container mx-auto px-4 py-10 md:py-16">
+      <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 py-10 md:py-16">
         {/* Tiêu đề trang */}
         <div className="mb-8">
           <h1 className="text-xl md:text-2xl font-bold uppercase text-gray-800 mb-2 relative inline-block">
@@ -29,7 +29,7 @@ export default function ContactPage() {
               style={{ border: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Bản đồ Mái Hiên Hoàng Thông"
+              title="Bản đồ Mái Hiên Nguyên Phát"
             ></iframe>
           </div>
         </div>

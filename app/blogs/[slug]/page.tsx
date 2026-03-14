@@ -57,7 +57,7 @@ export default async function NewsPage() {
         "thợ lơp tôn -thi công mái tôn  giá rẻ -uy tính- tại thuân an bình dương đt 090973306",
       date: "10 Tháng 7, 2024",
       excerpt:
-        "THI CÔNG MÁI TÔN GIÁ RẺ – MÁI TÔN HOÀNG THÔNG 0909743306- 0974388377 “ Hoàng Thông – uy tín chất lượng tạo nên thương hiệu ” Mái Tôn – Thay tôn Hoàng Thông chuyên tư vấn, thiết kế, thi...",
+        "THI CÔNG MÁI TÔN GIÁ RẺ – MÁI TÔN Nguyên Phát 0909743306- 0974388377 “ Nguyên Phát – uy tín chất lượng tạo nên thương hiệu ” Mái Tôn – Thay tôn Nguyên Phát chuyên tư vấn, thiết kế, thi...",
       image: null, // Bài không có ảnh
       link: "/mai-hien-mai-xep-mai-tha-thuan-an-hoang-thong/",
     },
@@ -103,7 +103,7 @@ export default async function NewsPage() {
 
   return (
     <div className="w-full bg-[#fcfcfc] font-sans pb-16">
-      <div className="container mx-auto px-4 py-8">
+      <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* ================= CỘT TRÁI (DANH SÁCH BÀI VIẾT) - 9/12 ================= */}
           <div className="w-full lg:w-3/4">

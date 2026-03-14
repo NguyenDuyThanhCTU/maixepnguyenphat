@@ -7,29 +7,27 @@ import {
   CheckCircle2,
   ChevronRight as ArrowRight,
 } from "lucide-react";
+import { SlideProps } from "@assets/props/Props";
 
-export default function HeroAndIntro() {
+export default function HeroAndIntro({ Data }: { Data: SlideProps[] }) {
   // --- Logic cho Slider ---
-  const banners = [
-    "https://maihienhoangthong.com/wp-content/uploads/2024/07/banner-12787192912.png",
-    "https://maihienhoangthong.com/wp-content/uploads/2024/04/banner02.png",
-  ];
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Tự động chuyển slide sau mỗi 4 giây
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
+      setCurrentSlide((prev) => (prev === Data.length - 1 ? 0 : prev + 1));
     }, 4000);
     return () => clearInterval(timer);
-  }, [banners.length]);
+  }, [Data.length]);
 
   const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? banners.length - 1 : currentSlide - 1);
+    setCurrentSlide(currentSlide === 0 ? Data.length - 1 : currentSlide - 1);
   };
 
   const nextSlide = () => {
-    setCurrentSlide(currentSlide === banners.length - 1 ? 0 : currentSlide + 1);
+    setCurrentSlide(currentSlide === Data.length - 1 ? 0 : currentSlide + 1);
   };
 
   return (
@@ -40,10 +38,10 @@ export default function HeroAndIntro() {
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {banners.map((src, index) => (
+          {Data.map((src, index) => (
             <img
               key={index}
-              src={src}
+              src={src?.image}
               alt={`Banner ${index + 1}`}
               className="w-full h-auto object-cover flex-shrink-0"
             />
@@ -66,7 +64,7 @@ export default function HeroAndIntro() {
 
         {/* Dấu chấm trang (Dots) */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-          {banners.map((_, index) => (
+          {Data.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
@@ -82,16 +80,16 @@ export default function HeroAndIntro() {
 
       {/* ================= INTRO SECTION ================= */}
       <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
+        <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4">
           {/* Tiêu đề Section */}
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold uppercase text-gray-800 mb-2 relative inline-block">
-              MÁI HIÊN - MÁI XẾP HOÀNG THÔNG
+              MÁI HIÊN - MÁI XẾP Nguyên Phát
               {/* Đường kẻ ngang trang trí mờ dưới tiêu đề (giống giao diện web gốc) */}
               <span className="absolute -bottom-2 left-1/2 w-16 h-[2px] bg-gray-300 -translate-x-1/2"></span>
             </h2>
             <p className="text-lg font-bold text-[#002651] mt-4">
-              “ Hoàng Thông – sự lựa chọn hoàn hảo cho mọi người ”
+              “ Nguyên Phát – sự lựa chọn hoàn hảo cho mọi người ”
             </p>
           </div>
 
@@ -102,7 +100,7 @@ export default function HeroAndIntro() {
               {/* Khung viền đứt nét như bản HTML gốc */}
               <div className="border border-dashed border-gray-400 rounded-xl p-6 bg-white shadow-sm mb-6">
                 <p className="text-gray-700 text-justify mb-4 leading-relaxed">
-                  <strong>Mái Hiên – Mái Xếp Hoàng Thông</strong> chuyên tư vấn,
+                  <strong>Mái Hiên – Mái Xếp Nguyên Phát</strong> chuyên tư vấn,
                   thiết kế, thi công mái hiên, mái xếp di động, mái vòm, màn
                   thả, dù che các loại,… Ngoài ra chúng tôi còn cung cấp linh
                   kiện, phụ kiện mái hiên mái xếp,… Với nhiều mẫu mã đa đạng,
@@ -114,7 +112,7 @@ export default function HeroAndIntro() {
                   vụ của chúng tôi.
                 </p>
                 <p className="text-gray-700 text-justify leading-relaxed">
-                  <strong>Mái Hiên – Mái Xếp Hoàng Thông</strong> Nhận thi công
+                  <strong>Mái Hiên – Mái Xếp Nguyên Phát</strong> Nhận thi công
                   lắp ráp, thiết kế cái loại mái hiên, mái che, mái xếp,… cho
                   quán cà phê, căn hộ, quán ăn, công ty,… với giá cả phải chăng
                   cạnh tranh. Quý khách chỉ cần liên hệ{" "}
@@ -182,9 +180,9 @@ export default function HeroAndIntro() {
             <div className="md:col-span-5 flex items-center justify-center">
               <div className="w-full h-full overflow-hidden rounded-xl shadow-md transition-transform duration-500 hover:scale-[1.02]">
                 <img
-                  src="https://maihienhoangthong.com/wp-content/uploads/2024/07/banner-1728891921.png"
-                  alt="Mái Hiên Hoàng Thông Giới Thiệu"
-                  className="w-full h-full object-cover"
+                  src="https://firebasestorage.googleapis.com/v0/b/khogachtinp.appspot.com/o/M%C3%A1i%20Hi%C3%AAn%20-%20M%C3%A1i%20X%E1%BA%BFp.png?alt=media&token=2f7068ad-ecbc-408a-90bb-80762d720475"
+                  alt="Mái Hiên Nguyên Phát Giới Thiệu"
+                  className="w-full h-full object-cover object-right"
                 />
               </div>
             </div>

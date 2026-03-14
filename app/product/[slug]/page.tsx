@@ -30,7 +30,7 @@ export default async function ProductDetailPage() {
   return (
     <div className="w-full bg-white font-sans pb-16">
       {/* Breadcrumb */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 py-4">
         <nav className="text-gray-500 uppercase text-[11px] md:text-[12px] font-medium tracking-wide">
           <a href="/" className="hover:text-[#002651] transition-colors">
             Home
@@ -53,7 +53,7 @@ export default async function ProductDetailPage() {
       </div>
 
       {/* Main Content Area */}
-      <div className="container mx-auto px-4 pt-2">
+      <div className="d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto px-4 pt-2">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* ================= CỘT TRÁI (CHI TIẾT SP) - 9/12 ================= */}
           <div className="w-full lg:w-3/4">
