@@ -26,6 +26,15 @@ export default function Footer({ Config }: { Config: Array<any> }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const addresses = [
+    "ĐC1: 49/9 Đường Số 4, P17, Bình Hưng Hòa A, Q.Bình Tân, Tp Hồ Chí Minh.",
+    "ĐC2: 212/10 Trần Não, P.Bình An, Q.2, Tp Hồ Chí Minh.",
+    "ĐC3: 214/28 Cống Quỳnh, P. Phạm Ngũ Lão, Q.1, Tp Hồ Chí Minh.",
+    "ĐC4: 47/5 Lũy Bán Bích, Q.Tân Phú, Tp Hồ Chí Minh.",
+    "ĐC5: 438/7 Nơ Trang Long, Q.Gò Vấp, Tp Hồ Chí Minh.",
+    "ĐC6: 26/7 Lê Văn Lương, Q7, Tp Hồ Chí Minh.",
+  ];
+
   return (
     <footer className="relative w-full bg-[#002651] text-gray-300 font-sans mt-10">
       {/* --- SVG Wave Divider (Hiệu ứng sóng lượn phía trên Footer) --- */}
@@ -154,23 +163,26 @@ export default function Footer({ Config }: { Config: Array<any> }) {
           {/* CỘT 3: Fanpage (4 phần) */}
           <div className="md:col-span-4 flex flex-col">
             <h4 className="text-white text-[18px] font-bold uppercase mb-6 relative inline-block">
-              Fanpage Facebook
+              Chi Nhánh
               <span className="absolute -bottom-2 left-0 w-12 h-[2px] bg-gray-400"></span>
             </h4>
 
             {/* Box chứa Iframe Facebook */}
-            <div className="w-full bg-white/5 rounded-lg overflow-hidden border border-white/10 h-[200px]">
-              <iframe
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=340&height=200&small_header=false&adapt_d:w-[1200px] p:w-auto d:mx-auto p:mx-2 mx-auto_width=true&hide_cover=false&show_facepile=true&appId=302009291669288"
-                width="100%"
-                height="100%"
-                style={{ border: "none", overflow: "hidden" }}
-                scrolling="no"
-                frameBorder="0"
-                allowFullScreen={true}
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                title="Facebook Fanpage"
-              ></iframe>
+            <div className="space-y-4 text-white">
+              {addresses.map((item, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <span className=" text-lg mt-1">➤</span>
+
+                  <p className=" leading-relaxed">
+                    <span className="font-medium">ĐC{index + 1}: </span>
+                    {item}
+                  </p>
+                </div>
+              ))}
+
+              <p className="font-semibold  pt-2 ">
+                Khảo sát thi công các tỉnh trên toàn quốc.
+              </p>
             </div>
           </div>
         </div>
